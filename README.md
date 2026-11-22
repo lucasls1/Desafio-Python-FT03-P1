@@ -32,3 +32,14 @@ o formato correto.
 
 Documentação: [ViaCEP](https://viacep.com.br/), [geocodificação Open-Meteo](https://open-meteo.com/en/docs/geocoding-api) e [previsão Open-Meteo](https://open-meteo.com/en/docs).
 
+## Persistencia
+Como funciona
+A função tratamento(dados, dados_clima, df_previsao) recebe:
+- dados: dicionário com informações do CEP, incluindo cep, logradouro, bairro, localidade, estado, regiao, uf e ddd.
+- dados_clima: dicionário de clima que contenha current.temperature_2m.
+- df_previsao: DataFrame do pandas com as colunas data, temperatura_minima e temperatura_maxima.
+A função cria as tabelas endereco e previsao, insere os dados e relaciona as tabelas pelo CEP. O resultado é uma lista de dicionários, com uma linha para cada data de previsão.
+Observações
+- O banco é criado com :memory:; os dados existem apenas durante a execução do processo e não são salvos em arquivo.
+- Como as tabelas têm chave primária fixa, uma segunda chamada à função na mesma conexão pode falhar ao tentar criá-las novamente.
+- O bloco finally está vazio (...), então não executa uma limpeza adicional. Se a conexão não for mais necessária, ela pode ser fechada com conn.close().
