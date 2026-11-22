@@ -1,5 +1,6 @@
 import pandas as pd
 
+# Função para auditar a qualidade dos dados.
 def auditar_dados(df: pd.DataFrame):
 
     auditoria = []

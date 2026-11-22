@@ -6,6 +6,7 @@ conn.row_factory = sql.Row
 
 cursor = conn.cursor()
 
+# função de tratamento criação e inserção de tabelas SQLite 
 def tratamento(dados:dict[str,Any],dados_clima:dict[str,Any],df_previsao:pd.DataFrame):
     valores = (
         dados['cep'],
