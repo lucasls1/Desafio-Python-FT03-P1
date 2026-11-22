@@ -209,7 +209,7 @@ O formato Parquet facilita o armazenamento e o consumo dos dados em ferramentas 
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git
+git clone https://github.com/lucasls1/Desafio-Python-FT03-P1.git
 ```
 
 ### 2. Acessar a pasta
