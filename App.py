@@ -4,6 +4,7 @@ from Transformacao import tratamento
 from Consumo_Api import consutar_cep, coordenadas,clima
 from Auditoria import auditar_dados
 
+
 # Função Principal
 def main():
 
@@ -34,18 +35,18 @@ def main():
                 engine='pyarrow',
                 compression='snappy',
                 index=False,
-                partition_cols=['ano', 'mes']
-)
+                partition_cols=['ano', 'mes'] 
+                )
               df_auditoria = auditar_dados(df)
 
               df_auditoria.to_csv(
-                'auditoria_qualidade.csv',
+               'auditoria_qualidade.csv',
                  index=False,
                  encoding='utf-8-sig'
                 )
               
               df.to_csv('Previsap_clima_por_cep.csv',index=False, encoding='utf-8-sig')
-              print(df)
+              #print(df)
     except Exception as erro:
         print(f'Erro encontrado:{erro}')
 
