@@ -1,15 +1,14 @@
-import requests as req # biblioteca de comunicação com servidores.
-
+from requisicoes import fazer_requisicao
 # função de consultar o cep na API
 def consutar_cep (cep: str):
 
     url_api_viacep = f'https://viacep.com.br/ws/{cep}/json/'
-    resposta = req.get(url_api_viacep)
-    return resposta.json()
+    resposta = fazer_requisicao(url_api_viacep)
+    return resposta
 
 # Função que busca as coordenadas atrávez da cidade e uf que vem da api anterior
 def coordenadas(cidade:str,uf:str):
-     resposta = req.get(
+     resposta = fazer_requisicao(
         "https://geocoding-api.open-meteo.com/v1/search",
         params={
             "name": f"{cidade}, {uf}, Brazil",
@@ -18,12 +17,12 @@ def coordenadas(cidade:str,uf:str):
             "countryCode": "BR",
         }
      )
-     res = resposta.json().get("results",[])
+     res = resposta.get("results",[])
      return res[0] if res else None
 
 # função para buscar dados de previsão do tempo com base nas coordenadas obtidas na função coordenadas extraindo latitude e longitude
 def clima(latitude:float,longitude:float):
-    resposta = req.get(
+    resposta = fazer_requisicao(
         "https://api.open-meteo.com/v1/forecast",
         params={
             "latitude": latitude,
@@ -34,4 +33,4 @@ def clima(latitude:float,longitude:float):
             "timezone": "America/Sao_Paulo",
         }
     )
-    return resposta.json()
+    return resposta
